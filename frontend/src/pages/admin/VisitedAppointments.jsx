@@ -23,7 +23,7 @@ const VisitedAppointments = () => {
             <h2 className="text-2xl font-bold mb-4">Spam Appointments</h2>
             <table className="w-full text-left border-collapse" >
                 <thead>
-                    <tr className="bg-red-600 text-white text-sm">
+                    <tr className="bg-blue-600 text-white text-sm">
                         <th className="p-3">#</th>
                         <th className="p-3">Name</th>
                         <th className="p-3">Email</th>

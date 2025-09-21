@@ -4,11 +4,11 @@ import "react-calendar/dist/Calendar.css";
 import "../../styles/calendarCustom.css";
 
 const CalendarAppointments = () => {
-  const [appointments, setAppointments] = useState([]); // All appointments
+  const [appointments, setAppointments] = useState([]); 
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [dateAppointments, setDateAppointments] = useState([]); // Appointments for selected date
+//   const [dateAppointments, setDateAppointments] = useState([]); 
 
-  // Fetch all appointments
+
   useEffect(() => {
     fetch("http://localhost:5000/api/appointments/all-appointments")
       .then((res) => res.json())
@@ -16,15 +16,15 @@ const CalendarAppointments = () => {
       .catch((err) => console.error("Error fetching appointments:", err));
   }, []);
 
-  // Filter appointments for selected date
+  
   const handleDateChange = (date) => {
     setSelectedDate(date);
-    const formatted = date.toISOString().split("T")[0]; // "YYYY-MM-DD"
+    const formatted = date.toISOString().split("T")[0]; 
     const filtered = appointments.filter((appt) => appt.date === formatted);
     setDateAppointments(filtered);
   };
 
-  // Count appointments for a date (for calendar tiles)
+  
   const getCountForDate = (date) => {
     const formatted = date.toISOString().split("T")[0];
     return appointments.filter((appt) => appt.date === formatted).length;
