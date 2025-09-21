@@ -1,7 +1,7 @@
-
 const { Schema, model } = require("mongoose");
 
-const appointmentSchema = new Schema({
+const appointmentSchema = new Schema(
+  {
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     email: { type: String, required: true },
@@ -12,11 +12,18 @@ const appointmentSchema = new Schema({
     date: { type: String, required: true },
     time: { type: String, required: true },
     referral: { type: String },
-    message: { type: String }
-}, { timestamps: true }
+    message: { type: String },
+
+    // new field
+    status: {
+      type: String,
+      enum: ["pending", "confirmed", "spam", "visited"],
+      default: "pending",
+    },
+  },
+  { timestamps: true }
 );
 
 const Appointment = model("Appointment", appointmentSchema);
 module.exports = Appointment;
-
 
