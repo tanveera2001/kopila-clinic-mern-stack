@@ -1,0 +1,49 @@
+/* calendarCustom.css */
+.custom-calendar {
+  border: none;
+  width: 100%;
+  font-family: "Inter", sans-serif;
+}
+
+.react-calendar {
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.react-calendar__navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.react-calendar__navigation button {
+  background: none;
+  color: #db2777; /* Tailwind pink-600 */
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 8px;
+  padding: 4px 8px;
+}
+
+.react-calendar__tile {
+  border-radius: 8px;
+  height: 70px;
+  text-align: center;
+  padding: 0.5rem;
+  transition: all 0.2s;
+}
+
+.react-calendar__tile:hover {
+  background: #fce7f3; /* pink-100 */
+}
+
+.react-calendar__tile--active {
+  background: #db2777 !important; /* pink-600 */
+  color: white !important;
+}
+
+.react-calendar__tile--now {
+  border: 2px solid #db2777;
+  font-weight: bold;
+}

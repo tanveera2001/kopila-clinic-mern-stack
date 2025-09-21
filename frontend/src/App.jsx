@@ -6,7 +6,8 @@ import AppointmentsDashboard from "./pages/admin/AppointmentsDashboard";
 import ConfirmedAppointments from "./pages/admin/ConfirmedAppointments";
 import SpamAppointments from "./pages/admin/SpamAppointments";
 import VisitedAppointments from "./pages/admin/VisitedAppointments";
-// import CalendarAppointments from "./pages/admin/CalendarAppointments";
+import CalendarAppointments from "./pages/admin/CalendarAppointments";
+
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
           <Route path="appointments/confirm" element={<ConfirmedAppointments />} />
           <Route path="appointments/spam" element={<SpamAppointments />} />
           <Route path="appointments/visited" element={<VisitedAppointments />} />
-          {/* <Route path="appointments/calendar" element={<CalendarAppointments />} /> */}
+          <Route path="appointments/calendar" element={<CalendarAppointments />} />
         </Route>
       </Routes>
     </Router>
