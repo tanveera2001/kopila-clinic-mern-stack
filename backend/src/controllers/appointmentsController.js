@@ -94,10 +94,36 @@ const calendarAppointments = async (req, res) => {
   }
 };
 
+const updateAppointments = async (req, res) => {
+  try{
+    const { id } = req.params;
+
+    const updatedAppointment = await Appointment.findByIdAndUpdate(
+      id,
+      { $set: req.body },
+      { new: true, runValidators: true}
+    );
+
+    if(!updatedAppointment) {
+      return res.status(404).json({ message: "Appointment not found"});
+    }
+
+    res.status(200).json({
+      message: "Appointment updated successfully",
+      appointment: updatedAppointment,
+    });
+
+  } catch (err) {
+    console.error("Error updating appointments", err);
+    res.status(500).json({message: "Server error", error: err.message});
+  }
+};
+
 module.exports = {
   appointment,
   allAppointments,
   updateStatus,
   clearAppointments,
-  calendarAppointments
+  calendarAppointments,
+  updateAppointments
 };

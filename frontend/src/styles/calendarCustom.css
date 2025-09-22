@@ -28,10 +28,14 @@
 
 .react-calendar__tile {
   border-radius: 8px;
-  height: 70px;
+  height: auto; /* Allow variable height for multiple times */
+  min-height: 70px;
   text-align: center;
   padding: 0.5rem;
   transition: all 0.2s;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .react-calendar__tile:hover {
@@ -46,4 +50,25 @@
 .react-calendar__tile--now {
   border: 2px solid #db2777;
   font-weight: bold;
+}
+
+/* Appointment list inside calendar tile */
+.react-calendar__tile ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.25rem 0 0 0;
+  font-size: 0.65rem;
+  line-height: 1rem;
+  max-height: 60px; /* Limit height if many appointments */
+  overflow-y: auto;
+  text-align: center;
+}
+
+.react-calendar__tile ul li {
+  background: #db2777; /* Tailwind pink-600 */
+  color: white;
+  border-radius: 4px;
+  margin-bottom: 2px;
+  padding: 1px 2px;
+  font-weight: 500;
 }
