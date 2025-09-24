@@ -1,5 +1,6 @@
 const Appointment = require("../models/appointmentModel");
-const data = require("../data");
+const data = require("../seeds/data");
+
 
 const seedAppointments = async (req, res) => {
   try {

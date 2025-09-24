@@ -8,10 +8,10 @@ const CalendarAppointments = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/appointments/all-appointments")
+    fetch("http://localhost:5000/api/appointments/all-appointments") 
       .then((res) => res.json())
       .then((data) => setAppointments(data))
-      .catch((err) => console.error("Error fetching appointments:", err));
+      .catch((err) => console.error("Error fetching appointments:", err)); 
   }, []);
 
   const handleDateChange = (date) => {

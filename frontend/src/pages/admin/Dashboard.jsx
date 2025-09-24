@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import UpdateAppointmentModal from "../../components/UpdateAppointmentModal";
-import AppointmentModal from "../../components/AppointmentModal";
-import AppointmentsTable from "../../components/AppointmentsTable";
+import AppointmentModal from "../../components/common/AppointmentModal";
+import UpdateAppointmentModal from "../../components/admin/UpdateAppointmentModal";
+import AppointmentsTable from "../../components/common/AppointmentsTable";
+
 
 const Dashboard = () => {
   const [appointments, setAppointments] = useState([]);
