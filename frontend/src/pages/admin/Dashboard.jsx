@@ -8,6 +8,7 @@ import AppointmentsTable from "../../components/common/AppointmentsTable";
 const Dashboard = () => {
   const [appointments, setAppointments] = useState([]);
   const [selectedAppt, setSelectedAppt] = useState(null);
+  const [payment, setPayment] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [updateForm, setUpdateForm] = useState({});
@@ -71,6 +72,34 @@ const Dashboard = () => {
     }
   };
 
+    const handlePayment = async (id, action) => {
+    const messages = {
+      yes: "Are you sure you want to CONFIRM this paid?",
+      no: "Are you sure you want to CONFIRM this unpaid?"
+    };
+
+    const proceed = window.confirm(messages[action]);
+    if (!proceed) return;
+
+    try {
+      await axios.patch(`http://localhost:5000/api/appointments/${id}/payment`, {
+        payment: action,
+      });
+
+      setAppointments((prev) =>
+        prev.map((appt) =>
+          appt._id === id ? { ...appt, payment: action} : appt
+        )
+      );
+
+      alert(`✅ Appointment moved to ${action.toUpperCase()} section`);
+      closeModal();
+    } catch (error) {
+      console.error(`Error updating appointment:`, error);
+      alert("Something went wrong. Please try again.");
+    }
+  };
+
   const handleUpdateSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -90,6 +119,8 @@ const Dashboard = () => {
 
   const countByStatus = (status) => appointments.filter((appt) => appt.status === status).length;
 
+  const totalAppointments = countByStatus("pending") + countByStatus("confirmed") + countByStatus("spam") + countByStatus("visited");
+
   return (
     <div className="space-y-10">
       {/* Header */}
@@ -101,9 +132,10 @@ const Dashboard = () => {
       {/* Stats */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6">
         {/* Total = Pending */}
+        {/* Total */}
         <div className="bg-white p-6 rounded shadow">
           <h3 className="text-gray-500 text-sm">Total Appointments</h3>
-          <p className="text-2xl font-semibold">{countByStatus("pending")}</p>
+          <p className="text-2xl font-semibold">{totalAppointments}</p>
         </div>
 
         {/* Pending */}
@@ -139,6 +171,7 @@ const Dashboard = () => {
         <AppointmentModal
           selectedAppt={selectedAppt}
           handleAction={handleAction}
+          handlePayment={handlePayment}
           openUpdateModal={openUpdateModal}
           closeModal={closeModal}
         />
@@ -158,3 +191,6 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+
+
+

@@ -56,6 +56,28 @@ const updateStatus = async (req, res) => {
   }
 };
 
+const updatePayment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { payment } = req.body; // "yes" or "no"
+
+    const updated = await Appointment.findByIdAndUpdate(
+      id,
+      { payment },
+      { new: true }
+    );
+
+    if (!updated) {
+      return res.status(404).json({ message: "Appointment not found" });
+    }
+
+    res.status(200).json({ message: "Payment updated successfully", updated });
+  } catch (error) {
+    console.error("Error updating payment:", error);
+    res.status(500).json({ message: "Failed to update payment" });
+  }
+};
+
 // Delete/Clear appointments
 const clearAppointments = async (req, res) => {
   try {
@@ -125,5 +147,6 @@ module.exports = {
   updateStatus,
   clearAppointments,
   calendarAppointments,
-  updateAppointments
+  updateAppointments,
+  updatePayment
 };

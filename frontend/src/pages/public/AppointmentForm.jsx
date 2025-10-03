@@ -2,39 +2,17 @@ import { useState } from "react";
 import axios from "axios";
 
 const AppointmentForm = () => {
-    const [formData, setFormData] = useState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        service: "",
-        counselling: "",
-        city: "",
-        date: "",
-        time: "",
-        referral: "",
-        message: "",
-    });
+    const [formData, setFormData] = useState({ firstName: "", lastName: "", email: "", phone: "", service: "", counselling: "", city: "", date: "", time: "", referral: "", message: "" });
     const [showAlert, setShowAlert] = useState(false);
+
+
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
             await axios.post("http://localhost:5000/api/appointments/appointment", formData);
             setShowAlert(true);
-            setFormData({
-                firstName: "",
-                lastName: "",
-                email: "",
-                phone: "",
-                service: "",
-                counselling: "",
-                city: "",
-                date: "",
-                time: "",
-                referral: "",
-                message: "",
-            });
+            setFormData({ firstName: "", lastName: "", email: "", phone: "", service: "", counselling: "", city: "", date: "", time: "", referral: "", message: "", });         
         } catch (error) {
             console.error("Error submitting appointment", error);
             alert("Failed to submit appointment. Try again!");
@@ -86,63 +64,27 @@ const AppointmentForm = () => {
                     <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         {/* First Name */}
                         <div className="flex flex-col">
-                            <label className="mb-1 text-base font-medium text-gray-700">
-                                First Name *
-                            </label>
-                            <input
-                                type="text"
-                                className="border rounded-md p-3"
-                                placeholder="Enter your first name"
-                                value={formData.firstName}
-                                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                                required
-                            />
+                            <label className="mb-1 text-base font-medium text-gray-700">First Name *</label>
+                            <input type="text" className="border rounded-md p-3" value={formData.firstName} onChange={(e) => setFormData({ ...formData, firstName: e.target.value })} required />
                         </div>
 
                         {/* Last Name */}
                         <div className="flex flex-col">
-                            <label className="mb-1 text-base font-medium text-gray-700">
-                                Last Name *
-                            </label>
-                            <input
-                                type="text"
-                                className="border rounded-md p-3"
-                                placeholder="Enter your last name"
-                                value={formData.lastName}
-                                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                                required
-                            />
+                            <label className="mb-1 text-base font-medium text-gray-700">Last Name *</label>
+                            <input type="text" className="border rounded-md p-3" placeholder="Enter your last name" value={formData.lastName} onChange={(e) => setFormData({ ...formData, lastName: e.target.value })} required />
                         </div>
 
                         {/* Email */}
                         <div className="flex flex-col">
-                            <label className="mb-1 text-base font-medium text-gray-700">
-                                Email Address *
-                            </label>
-                            <input
-                                type="email"
-                                className="border rounded-md p-3"
-                                placeholder="Enter your email"
-                                value={formData.email}
-                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                required
-                            />
+                            <label className="mb-1 text-base font-medium text-gray-700">Email Address *</label>
+                            <input type="email" className="border rounded-md p-3" placeholder="Enter your email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} required />
                         </div>
 
                         {/* Phone */}
                         <div className="flex flex-col">
-                            <label className="mb-1 text-base font-medium text-gray-700">
-                                Phone Number *
-                            </label>
-                            <input
-                                type="tel"
-                                className="border rounded-md p-3"
-                                placeholder="Enter your phone number"
-                                value={formData.phone}
-                                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                                required
-                            />
-                        </div>
+                            <label className="mb-1 text-base font-medium text-gray-700">Phone Number *</label>
+                            <input type="tel" className="border rounded-md p-3" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} required />    
+                        </div> 
 
                         {/* Divider */}
                         <div className="col-span-1 md:col-span-2">
@@ -152,15 +94,8 @@ const AppointmentForm = () => {
 
                         {/* Service Required */}
                         <div className="flex flex-col">
-                            <label className="mb-1 text-base font-medium text-gray-700">
-                                Service Required *
-                            </label>
-                            <select
-                                className="border rounded-md p-3"
-                                value={formData.service}
-                                onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                                required
-                            >
+                            <label className="mb-1 text-base font-medium text-gray-700">Service Required *</label>
+                            <select className="border rounded-md p-3" value={formData.service} onChange={(e) => setFormData({ ...formData, service: e.target.value })} required>
                                 <option value="">Select service</option>
                                 <option value="Ovulation induction">Ovulation induction</option>
                                 <option value="Intrauterine Insemination (IUI)">Intrauterine Insemination (IUI)</option>
@@ -180,15 +115,8 @@ const AppointmentForm = () => {
 
                         {/* Counselling Type */}
                         <div className="flex flex-col">
-                            <label className="mb-1 text-base font-medium text-gray-700">
-                                Counselling Type *
-                            </label>
-                            <select
-                                className="border rounded-md p-3"
-                                value={formData.counselling}
-                                onChange={(e) => setFormData({ ...formData, counselling: e.target.value })}
-                                required
-                            >
+                            <label className="mb-1 text-base font-medium text-gray-700">Counselling Type *</label>
+                            <select className="border rounded-md p-3" value={formData.counselling} onChange={(e) => setFormData({ ...formData, counselling: e.target.value })} required>
                                 <option value="">Select counselling type</option>
                                 <option value="In clinic">In clinic</option>
                                 <option value="Online">Online</option>
@@ -197,14 +125,8 @@ const AppointmentForm = () => {
 
                         {/* City */}
                         <div className="flex flex-col">
-                            <label className="mb-1 text-base font-medium text-gray-700">
-                                City
-                            </label>
-                            <select
-                                className="border rounded-md p-3"
-                                value={formData.city}
-                                onChange={(e) => setFormData({ ...formData, city: e.target.value })}
-                            >
+                            <label className="mb-1 text-base font-medium text-gray-700">City</label>
+                            <select className="border rounded-md p-3" value={formData.city} onChange={(e) => setFormData({ ...formData, city: e.target.value })}>
                                 <option value="">Select City</option>
                                 <option value="Damak">Damak</option>
                                 <option value="Birtamode">Birtamode</option>
@@ -218,29 +140,14 @@ const AppointmentForm = () => {
 
                         {/* Preferred Date */}
                         <div className="flex flex-col">
-                            <label className="mb-1 text-base font-medium text-gray-700">
-                                Preferred Date *
-                            </label>
-                            <input
-                                type="date"
-                                className="border rounded-md p-3"
-                                value={formData.date}
-                                onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                                required
-                            />
+                            <label className="mb-1 text-base font-medium text-gray-700">Preferred Date *</label>
+                            <input type="date" className="border rounded-md p-3" value={formData.date} onChange={(e) => setFormData({ ...formData, date: e.target.value })} required />
                         </div>
 
-                        {/* Preferred Time */}
+                         {/* Preferred Time */}
                         <div className="flex flex-col">
-                            <label className="mb-1 text-base font-medium text-gray-700">
-                                Preferred Time *
-                            </label>
-                            <select
-                                className="border rounded-md p-3"
-                                value={formData.time}
-                                onChange={(e) => setFormData({ ...formData, time: e.target.value })}
-                                required
-                            >
+                            <label className="mb-1 text-base font-medium text-gray-700">Preferred Time *</label>
+                            <select className="border rounded-md p-3" value={formData.time} onChange={(e) => setFormData({ ...formData, time: e.target.value })} required >
                                 <option value="">Select time</option>
                                 <option value="07:00 AM">07:00 AM</option>
                                 <option value="07:30 AM">07:30 AM</option>
@@ -266,14 +173,8 @@ const AppointmentForm = () => {
 
                         {/* How did you know about us */}
                         <div className="flex flex-col">
-                            <label className="mb-1 text-base font-medium text-gray-700">
-                                How did you know about us?
-                            </label>
-                            <select
-                                className="border rounded-md p-3"
-                                value={formData.referral}
-                                onChange={(e) => setFormData({ ...formData, referral: e.target.value })}
-                            >
+                            <label className="mb-1 text-base font-medium text-gray-700">How did you know about us?</label>
+                            <select className="border rounded-md p-3" value={formData.referral} onChange={(e) => setFormData({ ...formData, referral: e.target.value })} >
                                 <option value=""></option>
                                 <option value="FM Radio">FM Radio</option>
                                 <option value="Social Media">Social Media</option>
@@ -288,27 +189,15 @@ const AppointmentForm = () => {
 
                         {/* Additional Message */}
                         <div className="flex flex-col md:col-span-2">
-                            <label className="mb-1 text-base font-medium text-gray-700">
-                                Additional Message
-                            </label>
-                            <textarea
-                                placeholder="Please describe your concerns or any specific requirements"
-                                className="border rounded-md p-3"
-                                rows="3"
-                                value={formData.message}
-                                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                            ></textarea>
+                            <label className="mb-1 text-base font-medium text-gray-700">Additional Message</label>
+                            <textarea placeholder="Please describe your concerns or any specific requirements" className="border rounded-md p-3" rows="3" value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} ></textarea>
                         </div>
-
+                                
                         {/* Submit Button */}
                         <div className="col-span-1 md:col-span-2 flex justify-center mt-4">
-                            <button
-                                type="submit"
-                                className="bg-pink-600 hover:bg-pink-700 text-white py-3 px-16 rounded-4xl"
-                            >
-                                Submit Appointment Request
-                            </button>
+                            <button type="submit" className="bg-pink-600 hover:bg-pink-700 text-white py-3 px-16 rounded-4xl" >Submit Appointment Request</button>
                         </div>
+
                     </form>
                 </div>
 
@@ -332,19 +221,12 @@ const AppointmentForm = () => {
             {showAlert && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black/20 backdrop-blur-sm z-50">
                     <div className="bg-white rounded-lg shadow-lg p-6 max-w-sm text-center">
-                        <h2 className="text-xl font-semibold mb-4 text-green-600">
-                            Appointment Submitted
-                        </h2>
+                        <h2 className="text-xl font-semibold mb-4 text-green-600">Appointment Submitted</h2>
                         <p className="text-gray-700 mb-4">
                             Appointment request submitted successfully! <br />
                             We will contact you shortly to confirm.
                         </p>
-                        <button
-                            onClick={() => setShowAlert(false)}
-                            className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-2 rounded"
-                        >
-                            OK
-                        </button>
+                        <button onClick={() => setShowAlert(false)} className="bg-pink-600 hover:bg-pink-700 text-white px-6 py-2 rounded">OK </button>
                     </div>
                 </div>
             )}
@@ -353,3 +235,37 @@ const AppointmentForm = () => {
 };
 
 export default AppointmentForm;
+                            
+                               
+                                
+                                
+                            
+
+                                
+
+
+
+
+
+
+
+
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                        
+
+                       
+
+                        
+
+                        
+

@@ -20,6 +20,12 @@ const appointmentSchema = new Schema(
       enum: ["pending", "confirmed", "spam", "visited"],
       default: "pending",
     },
+
+    payment: {
+      type: String,
+      enum: ["yes", "no"],
+      default: "no",
+    },
   },
   { timestamps: true }
 );

@@ -1,5 +1,5 @@
 
-const AppointmentModal = ({ selectedAppt, handleAction, openUpdateModal, closeModal }) => {
+const AppointmentModal = ({ selectedAppt, handleAction, handlePayment, openUpdateModal, closeModal }) => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/40 z-50">
       <div className="bg-white rounded-lg shadow-lg p-6 w-full max-w-lg">
@@ -41,6 +41,12 @@ const AppointmentModal = ({ selectedAppt, handleAction, openUpdateModal, closeMo
             className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded cursor-pointer"
           >
             ✏️ Update
+          </button>
+          <button
+            onClick={() => handlePayment(selectedAppt._id, "yes")}
+            className="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded cursor-pointer"
+          >
+             Payment
           </button>
         </div>
 

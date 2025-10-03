@@ -19,6 +19,11 @@ const ConfirmedAppointments = () => {
         }
     };
 
+    // 🔑 Sort by updatedAt so the latest confirmed shows first
+    const sortedAppointments = [...appointments].sort(
+        (a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)
+    );
+
     return (
         <div className="p-6">
             <h1 className="text-2xl font-bold mb-4">Confirmed Appointments</h1>
@@ -40,14 +45,16 @@ const ConfirmedAppointments = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {appointments.length > 0 ? (
-                            appointments.map((appt, index) => (
+                        {sortedAppointments.length > 0 ? (
+                            sortedAppointments.map((appt, index) => (
                                 <tr
                                     key={appt._id}
                                     className={index % 2 === 0 ? "bg-gray-50" : "bg-white"}
                                 >
                                     <td className="p-3">{index + 1}</td>
-                                    <td className="p-3">{appt.firstName} {appt.lastName}</td>
+                                    <td className="p-3">
+                                        {appt.firstName} {appt.lastName}
+                                    </td>
                                     <td className="p-3">{appt.email}</td>
                                     <td className="p-3">{appt.phone}</td>
                                     <td className="p-3">{appt.service}</td>
